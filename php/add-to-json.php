@@ -12,14 +12,14 @@ file_put_contents('../json/todos.json', $jsonData);
 
 
 
-//add todo json fie
-/*
-$data = $_POST;
-
-$inp = file_get_contents('../json/todos.json');
-$tempArray = json_decode($inp);
-array_push($tempArray, $data);
-$jsonData = json_encode($tempArray);
-file_put_contents('../json/todos.json', $jsonData);
-echo $jsonData;
-*/
+    //add todo json fie
+    /*
+    $data = $_POST;
+    
+    $inp = file_get_contents('../json/todos.json');
+    $tempArray = json_decode($inp);
+    array_push($tempArray, $data);
+    $jsonData = json_encode($tempArray);
+    file_put_contents('../json/todos.json', $jsonData);
+    echo $jsonData;
+    */
