@@ -6,28 +6,35 @@ const input = document.getElementById("input");
 
 //Varibles
 let LIST = [],
-    id;
+    id,
+    isAuth = true;
+
+//check if auth
+if (!isAuth) {
+    throw new Error("Something went badly wrong!");
+}
 
 // get items from JSON file
-fetch('./json/todos.json')
-    .then(res => res.json())
-    .then(data => {
-        //check if is not empty
-        if (data != null) {
-            // LIST = JSON.parse(data);
-            LIST = data;
-            id = LIST.length;
-            loadList(LIST);
-            updateAllTodos(LIST)
+function getData() {
+    fetch('./json/todos.json')
+        .then(res => res.json())
+        .then(data => {
+            //check if is not empty
+            if (data != null) {
+                // LIST = JSON.parse(data);
+                LIST = data;
+                id = LIST.length;
+                loadList(LIST);
+                updateAllTodos(LIST)
+            } else {
+                //if data isn't empty
+                LIST = [];
+                id = 0;
+            }
+        });
 
-
-
-        } else {
-            //if data isn't empty
-            LIST = [];
-            id = 0;
-        }
-    });
+}
+getData()
 
 //load items to the user's interface
 function loadList(array) {
