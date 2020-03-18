@@ -10,6 +10,7 @@ const authSection = document.querySelector(".auth");
 //Varibles
 let LIST = [];
 let id = 1;
+let isAuth = false;
 
 // get items from JSON file
 function getData() {
@@ -31,7 +32,20 @@ function getData() {
         });
 
 }
-getData()
+
+//Application startup point
+if (!isAuth) {
+    authForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if (md5(passwordInput.value) == '0f23e56a734b09d93e72d7857a593bba') {
+            authSection.classList.remove('active')
+            getData()
+        } else {
+            passwordInput.value = ''
+            passwordInput.focus()
+        }
+    })
+}
 
 //load items to the user's interface
 function loadList(array) {
