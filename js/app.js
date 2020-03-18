@@ -3,16 +3,13 @@ const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
+const authForm = document.getElementById("authForm");
+const passwordInput = document.getElementById("passwordInput");
+const authSection = document.querySelector(".auth");
 
 //Varibles
-let LIST = [],
-    id,
-    isAuth = true;
-
-//check if auth
-if (!isAuth) {
-    throw new Error("Something went badly wrong!");
-}
+let LIST = [];
+let id = 1;
 
 // get items from JSON file
 function getData() {
@@ -23,13 +20,13 @@ function getData() {
             if (data != null) {
                 // LIST = JSON.parse(data);
                 LIST = data;
-                id = LIST.length;
+                id = LIST.length + 1;
                 loadList(LIST);
                 updateAllTodos(LIST)
             } else {
                 //if data isn't empty
                 LIST = [];
-                id = 0;
+                id = 1;
             }
         });
 
@@ -113,13 +110,15 @@ function completeToDo(e) {
     e.classList.toggle(UNCHECK);
     e.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
 
-    LIST[e.id].done = LIST[e.id].done ? false : true;
+    let item = LIST.find(item => item.id == e.id)
+    item.done = item.done ? false : true;
 }
 
 //Remove to do
 function removeToDO(e) {
+    let item = LIST.find(item => item.id == e.id)
     e.parentNode.parentNode.removeChild(e.parentNode)
-    LIST[e.id].trash = true;
+    item.trash = true;
 }
 
 //Event Listener For Delete or Complete
